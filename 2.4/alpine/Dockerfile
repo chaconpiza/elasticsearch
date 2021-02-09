@@ -13,10 +13,11 @@ ENV GPG_KEY 46095ACC8548582C1A2699A9D27D666CD88E42B4
 WORKDIR /usr/share/elasticsearch
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-ENV ELASTICSEARCH_VERSION 2.4.6
-ENV ELASTICSEARCH_TARBALL="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.4.6.tar.gz" \
-	ELASTICSEARCH_TARBALL_ASC="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.4.6.tar.gz.asc" \
-	ELASTICSEARCH_TARBALL_SHA1="c3441bef89cd91206edf3cf3bd5c4b62550e60a9"
+COPY elasticsearch.tar.gz ./elasticsearch.tar.gz
+#ENV ELASTICSEARCH_VERSION 2.4.6
+#ENV ELASTICSEARCH_TARBALL="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.4.6.tar.gz" \
+#	ELASTICSEARCH_TARBALL_ASC="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.4.6.tar.gz.asc" \
+#	ELASTICSEARCH_TARBALL_SHA1="c3441bef89cd91206edf3cf3bd5c4b62550e60a9"
 
 RUN set -ex; \
 	\
@@ -27,7 +28,7 @@ RUN set -ex; \
 		tar \
 	; \
 	\
-	wget -O elasticsearch.tar.gz "$ELASTICSEARCH_TARBALL"; \
+	#wget -O elasticsearch.tar.gz "$ELASTICSEARCH_TARBALL"; \
 	\
 	if [ "$ELASTICSEARCH_TARBALL_SHA1" ]; then \
 		echo "$ELASTICSEARCH_TARBALL_SHA1 *elasticsearch.tar.gz" | sha1sum -c -; \
